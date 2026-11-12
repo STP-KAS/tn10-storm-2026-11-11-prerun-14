@@ -59,7 +59,17 @@ Not a gate. Read on 2026-11-12 between 15:30Z and 15:50Z. This is our own TN10 t
 
 ## Offline rehearsal, recorded before `PRE-RUN-OPEN`
 
-REHEARSAL_PLACEHOLDER
+Two attempts on the desk, against a local bare origin. The real pre-run 14 desk runner, counter, read-only mempool probe and our heavy-lane process ran with the rehearsal family sender, the stand-in genesis submit and pre-run 9's stand-in node. The heavy lane submitted only to the stand-in payment-key node; none of its rehearsal transactions reached a real node. Short times: BASE 1 minute, each lane segment 1 minute, RETURN 2 minutes, a 2-minute tail. The probe read the real desk node (read-only), so its columns show the real mempool at that time (the outside heavy stream was there) and none of our rehearsal transactions. The rehearsal family sender writes kit21's row fields (bill rate, node mass about 41,633, node rate) so the node-rate table renders; it does not build hops.
+
+Rehearsal A (p14-a), 2026-11-12 17:57:59Z to 17:58:13Z (Brussels 18:57 to 18:58). `HELD` at the genesis, runner exit 3. The cause was our setup, not the runner: the rehearsal's sixteen folder held the real genesis submit instead of the stand-in, and it stopped on the stand-in bundle before it submitted anything (the stand-in node counted no spend). Nothing changed in the runner.
+
+Rehearsal B (p14-b), 2026-11-12 17:59:26Z to 18:17:00Z (Brussels 18:59 to 19:17), with the sixteen folder set up as in pre-run 13 (pre-run 14's fee table and file format, the stand-in genesis submit). Runner exit 0.
+
+- `FEE_SPLIT` verified on the submit rows: floor 100, r126 126, r150 150, r200 200, r300 300, every tier on the desk path. No payment sender was started (`senders=0`). The node-rate table rendered per tier (100.27, 126.28, 150.1, 200.24, 300.2 on 41,633 node mass; bill rates 320, 403, 479, 639, 958).
+- Lane timeline as planned: `LANE_PLAN BASE:N0-control HOLD-1:N20-r100+N40-r100 HOLD-2:N0-mid HOLD-3:N20-r126+N40-r126 then N0-drain`, each `LANE_SET` 1 second before its minute; `lane-minute.log` carried the right N and rate per minute.
+- Lane: 2,052 submits, 2,052 accepted by the stand-in, 0 rejected, 0 chains lost, 50 payment-key coins taken; about 435 submits a minute at N = 20 and 585 at N = 40, under the 600 cap. `LANE_END` came on STOP with nothing pending. Stand-in fees 617.98 tKAS and 76.95 tKAS parked; the stand-in is not the network, so those are not spend. As in pre-run 13, 10 lane submits fell in the last second of the BASE minute (the lane starts its chains when N is set, 1 second early); the write-up mentions it.
+- BASE, HOLD-1, HOLD-2, HOLD-3, the pinned HOLD-4 minute (18:11Z) and RETURN published as `OBSERVATION`, then `TIMELINE`, `MEMPOOL` and `METHOD`. No `${`, `undefined`, `NaN`, 64-hex string or profile path in any of the nine files. No rehearsal process was left running.
+- Not exercised: the lane's pause on more than N + 2 of our entries, the node-side drift check (the rehearsal lane wrote only to the stand-in), and the usable-tKAS abort line (key 0 stayed far above it). They stay as live guards.
 
 ## Status after the live run
 
