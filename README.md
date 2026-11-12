@@ -4,6 +4,8 @@
 
 # tn10-storm-2026-11-11-prerun-14
 
+> **Result (after the run).** Pre-run 14 ran through RETURN, every minute clean, no repair. With our covenant hops priced on the node's own mass, a hop at our heavy lane's rate lost 12–24 percent of its BASE rate, about 1.6–2 times the lane's rate kept it within about 4 percent, and 2.4–3 times held it; recovery took under a minute. What we observed: [logs/LESSONS.md](logs/LESSONS.md). Our heavy lane slowed other TN10 users' transactions while it ran; see the [public statement](PLAYBOOK.md#public-statement).
+
 **Pre-run 14 of the Wednesday neuron.** The neuron stays [tn10-storm-2026-11-11](https://github.com/STP-KAS/tn10-storm-2026-11-11). This repo does not edit that repo, does not write `REVIEW_CLOSED`, and does not set or move a clock for it. [tn10-storm-2026-11-10](https://github.com/STP-KAS/tn10-storm-2026-11-10) (Tuesday) is not edited from here either.
 
 > **Our own testing.** This is our own Kaspa Testnet-10 testing, run on our own machines and nodes. What these pages report is what we observed in this run; it is not a claim of how TN10 or Kaspa behave in general.

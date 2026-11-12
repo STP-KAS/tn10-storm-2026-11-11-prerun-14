@@ -73,11 +73,19 @@ Rehearsal B (p14-b), 2026-11-12 17:59:26Z to 18:17:00Z (Brussels 18:59 to 19:17)
 
 ## Status after the live run
 
-AFTER_PLACEHOLDER
+Read on 2026-11-12 between 19:52Z and 20:08Z. Not a gate.
+
+- **The run finished through RETURN.** The desk runner (started 18:20:25Z) ran BASE, HOLD-1, HOLD-2, HOLD-3, the pinned HOLD-4 minute (19:38Z) and RETURN without a repair or a restart, every whole minute kept pace, then stopped on its own (`RUN_STOP return-closed` 19:52:25Z, 5-minute counter tail, `RUN end` 19:57:44Z) and published `counts/chain/TIMELINE.md`, `counts/chain/MEMPOOL.md` and [logs/METHOD.md](logs/METHOD.md). No runner process was left on the desk (checked 19:58Z). The private TN10 kaspad (2.1.0) was not stopped and is still up, synced. No devnet, `KaspaPublicNode` or miner was started; `serve.mjs` and its keeper were not touched.
+- Our heavy lane: `LANE_END` 19:52:25Z, 13,150 accepted of 13,150, 0 rejected, 0 lost, 4,031.00 tKAS fees, 493.13 tKAS parked on our sink key (not swept), nothing pending. The hold at 45 blocks of ready mass tripped 15 times at N = 40, 20 s each.
+- Mini: the runner (MINI-ARMED 18:19:43Z) published a second read for every step, each read in full, matched the desk in 422 of 425 cohort cells (three off by 1–3, Mini lower) and ended on its own after its tail (`RUNNER end` 20:07:43Z). Its TN10 kaspad was not wiped or restarted.
+- Bot: the waiter read HOLD-3 5 s after it reached origin, checked for a free third kaspad at 19:37:30Z (before the 19:38Z minute), found none and published `NO SEND no-free-node` (b07be6e, on origin 19:39:04Z). On time this run. Nothing was sent by the bot.
+- Keys after the run (status read 20:01:30Z): key 0 5,005 coins over 3 tKAS, 126,748 usable tKAS (abort line 18,000 never near), 2,239 coins at 3 tKAS or less; payment key 7,722 coins over 10 tKAS (7,894 before); keys 1–15 have no genesis coin left. Our sink key holds pre-run 13's and pre-run 14's parked outputs, not swept.
+- The outside heavy fee-100 stream was present all run. We do not say who sends it.
+- Results: [logs/LESSONS.md](logs/LESSONS.md), [logs/METHOD.md](logs/METHOD.md), and the pre-run 14 block in [locks/LOCKED.md](locks/LOCKED.md).
 
 ### Public statement
 
-We run our own heavy lane on TN10 in this pre-run, with the operator's OK, at N = 20 and 40, at 100 and then at 126 sompi/gram, for about 48 minutes in all. While it runs, other TN10 users' transactions paying up to about the lane's rate wait longer on the nodes that see it. The figures for this run are added here after it. This is our own testing; tKAS has no value.
+We run our own heavy lane on TN10 in this pre-run, with the operator's OK, at N = 20 and 40, at 100 and then at 126 sompi/gram, for about 48 minutes in all. While it runs, other TN10 users' transactions paying up to about the lane's rate wait longer on the nodes that see it. In this run, in the 48 lane minutes, other traffic landed on our desk node fell by about 4–10 percent (median about 3,190–3,390 a minute against 3,510–3,560 with the lane at 0), the node's priority fee estimate read a median of 244–299 instead of 195–237, and the backlog of other users' transactions at 100 sompi/gram in the desk mempool grew while the lane ran and shrank while it was at 0. The lane was stepped down to zero at the end and its own waiting transactions cleared within a minute. This is our own testing; tKAS has no value.
 
 ## When something breaks
 
